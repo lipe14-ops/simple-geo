@@ -2,7 +2,7 @@
 
 MenuHelper::MenuHelper(Vector2 position, float width, float height){
     background = { position.x, position.y, width, height };
-    active = false;
+    active = true;
 
     fontSize = 20;
     lineSpacing = 30;
@@ -31,38 +31,35 @@ void MenuHelper::Draw() const{
     int startY = background.y + padding;
 
     DrawText(
-        "Utilizando x como variável, insira uma função", startX,
+        "Clique no botão ' ? ' para fechar e abrir essa aba  ---->", startX,
         startY,
-        fontSize, BLACK
-    );
-    DrawText(
-        "polinomial utilizando as seguintes operações:", startX,
-        startY + lineSpacing * 1,
         fontSize, BLACK
     );
 
     DrawText(
-        "adição:           +", startX,
+        "Utilizando x como variável, insira uma função polinomial à", startX,
+        startY + lineSpacing * 2,
+        fontSize, BLACK
+    );
+    DrawText(
+        "esquerda. Utilize os seguinte símbolos para operações:", startX,
         startY + lineSpacing * 3,
         fontSize, BLACK
     );
+
     DrawText(
-        "subtração:      -", startX,
-        startY + lineSpacing * 4,
-        fontSize, BLACK
-    );
-    DrawText(
-        "multiplicação:   *", startX,
+        "      adição:           +        |        subtração:      -", startX,
         startY + lineSpacing * 5,
         fontSize, BLACK
     );
     DrawText(
-        "divisão:          /", startX,
+        "      multiplicação:   *        |        divisão:          /", startX,
         startY + lineSpacing * 6,
         fontSize, BLACK
     );
+
     DrawText(
-        "potenciação:    ^", startX,
+        "      potenciação:    ^        |", startX,
         startY + lineSpacing * 7,
         fontSize, BLACK
     );
@@ -74,14 +71,9 @@ void MenuHelper::Draw() const{
     );
 
     DrawText(
-        "Clique em ''Desenhar Função'' para visualisar", startX,
+        "Clique em ''Desenhar Função'' para visualisar o gráfico.", startX,
         startY + lineSpacing * 10 + 10,
         fontSize, BLACK
     );
 
-    DrawText(
-        "o gráfico.", startX,
-        startY + lineSpacing * 11 + 10,
-        fontSize, BLACK
-    );
 }

@@ -22,7 +22,7 @@ int main()
 
     Color background = LIGHTGRAY;
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
-    MenuHelper menuHelper({(float)screenWidth - 580, 15}, 500, 390);
+    MenuHelper menuHelper({(float)screenWidth - 690, 15}, 610, 370);
     
     PlanoCartesiano plano(20.0f);
 
