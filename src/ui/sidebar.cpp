@@ -1,5 +1,5 @@
-#include "../include/sidebar.hpp"
-#include "../include/raygui.h"
+#include "sidebar.hpp"
+#include "include/raygui.h"
 
 
 Sidebar::Sidebar(int screenHeight, int width)

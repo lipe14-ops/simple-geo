@@ -1,4 +1,4 @@
-#include "../include/menuHelper.hpp"
+#include "menuHelper.hpp"
 
 MenuHelper::MenuHelper(Vector2 position, float width, float height){
     background = { position.x, position.y, width, height };
@@ -75,13 +75,13 @@ void MenuHelper::Draw() const{
 
     DrawText(
         "Clique em ''Desenhar Função'' para visualisar", startX,
-        startY + lineSpacing * 11,
+        startY + lineSpacing * 10 + 10,
         fontSize, BLACK
     );
 
     DrawText(
         "o gráfico.", startX,
-        startY + lineSpacing * 12,
+        startY + lineSpacing * 11 + 10,
         fontSize, BLACK
     );
 }

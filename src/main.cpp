@@ -3,9 +3,9 @@
 #include <raylib.h>
 #include <iostream>
 #include "plotting/PlanoCartesiano.hpp"
-#include "include/sidebar.hpp"
-#include "include/menuHelper.hpp"
-#include "include/rayGUIstyles.hpp"
+#include "ui/sidebar.hpp"
+#include "ui/menuHelper.hpp"
+#include "ui/rayGuiStyles.hpp"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ int main()
 
     Color background = LIGHTGRAY;
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
-    MenuHelper menuHelper({(float)screenWidth - 580, 15}, 500, 410);
+    MenuHelper menuHelper({(float)screenWidth - 580, 15}, 500, 390);
     
     PlanoCartesiano plano(20.0f);
 
@@ -42,7 +42,6 @@ int main()
             } catch (const runtime_error& e) {
                 sidebar.SetError(e.what());
             }
-
         }
 
         plano.Atualizar(plotWidth, screenHeight, SIDEBAR_WIDTH);

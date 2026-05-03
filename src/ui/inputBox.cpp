@@ -1,6 +1,6 @@
-#include "../include/inputBox.hpp"
-#include "../include/raygui.h"
-#include "../include/inputBox.hpp"
+#include "inputBox.hpp"
+#include "include/raygui.h"
+#include "inputBox.hpp"
 #include <cstring>
 
 InputBox::InputBox(Rectangle box, Rectangle buttonBox){

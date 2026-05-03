@@ -1,5 +1,5 @@
-#include "../include/rayGUIstyles.hpp"
-#include "../include/raygui.h"
+#include "rayGuiStyles.hpp"
+#include "include/raygui.h"
 #include <raylib.h>
 
 void SetupGuiStyles(){
