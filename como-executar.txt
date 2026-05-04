@@ -1,0 +1,25 @@
+======================
+    No Windows
+======================
+
+Só compilar:
+mingw32-make
+
+Compilar e executar:
+mingw32-make run
+
+Limpar a pasta obj e apagar o .exe:
+mingw32-make clean
+
+======================
+    No Linux
+======================
+
+Só compilar:
+make
+
+Compilar e executar:
+make run
+
+Limpar a pasta obj e apagar o .exe:
+make clean
