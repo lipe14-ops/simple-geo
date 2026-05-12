@@ -12,6 +12,7 @@ public:
     // modificação: adicionado offset
     void Atualizar(int largura, int altura, int offsetX);
     void Desenhar(int largura, int altura, int offsetX) const;
+    void Limpar();
 
 private:
     float m_escala;
@@ -44,4 +45,8 @@ void PlanoCartesiano::Desenhar(int largura, int altura, int offsetX=0) const {
 void PlanoCartesiano::DesenharEixos(int largura, int altura, int offsetX) const {
     DrawLine(0, altura / 2, largura + offsetX, altura / 2, BLACK);       // Eixo X
     DrawLine(largura / 2 + offsetX, 0, largura / 2 + offsetX, altura, BLACK);      // Eixo Y
+}
+
+void PlanoCartesiano::Limpar() {
+    m_graficos.clear();
 }
