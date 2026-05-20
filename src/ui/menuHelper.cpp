@@ -1,12 +1,15 @@
 #include "menuHelper.hpp"
 
-MenuHelper::MenuHelper(Vector2 position, float width, float height){
-    background = { position.x, position.y, width, height };
-    active = true;
-
+MenuHelper::MenuHelper(float screenWidth){
+    posX = screenWidth - 690;
+    posY = 15;
+    width = 610;
+    
     fontSize = 20;
     lineSpacing = 30;
     padding = 15;
+    
+    active = true;
 }
 
 void MenuHelper::Toggle(){
@@ -21,9 +24,11 @@ bool MenuHelper::IsActive() const{
     return active;
 }
 
-void MenuHelper::Draw() const{
+void MenuHelper::Draw(float screenWidth){
     if (!active) return;
 
+    posX = screenWidth - 690;
+    Rectangle background = {posX, posY, width, (float)lineSpacing*10 + 70};
     DrawRectangleRec(background, LIGHTGRAY);
     DrawRectangleLinesEx(background, 2, BLACK);
 

@@ -47,7 +47,7 @@ void Janela::Executar() {
 
     Color background = LIGHTGRAY;
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
-    MenuHelper menuHelper({(float)screenWidth - 690, 15}, 610, 370);
+    MenuHelper menuHelper((float)screenWidth);
 
     while (!WindowShouldClose()) {
         ProcessarEntrada();
@@ -83,7 +83,7 @@ void Janela::Executar() {
             if (GuiButton({(float)screenWidth - 65, 15, 50, 50}, "?")) {
                 menuHelper.Toggle();
             }
-            menuHelper.Draw();       
+            menuHelper.Draw((float)screenWidth);       
             sidebar.Draw(screenHeight);
 
         EndDrawing();
