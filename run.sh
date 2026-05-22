@@ -1,1 +1,0 @@
-g++ -o main ./src/main.cpp ./src/parsing/expressions.cpp -lraylib
