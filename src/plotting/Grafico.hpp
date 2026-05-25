@@ -14,7 +14,8 @@ class Grafico {
 public:
     Grafico(std::string funcao, Color cor = BLUE);
     // modificação: adicionado offset
-    void Calcular(int largura, int altura, float escala, int offsetX);
+    // modificação: adicionado offsetTranslacao para translação do mouse
+    void Calcular(int largura, int altura, float escala, int offsetX, Vector2 offsetTranslacao = {0.0f, 0.0f});
     void Desenhar() const;
 
 private:
@@ -27,7 +28,8 @@ Grafico::Grafico(string funcao, Color cor)
     : m_funcao(funcao), m_cor(cor) {}
 
 // modificação: adicionado offset como parâmetro para calcular a distância da barra lateral da esquerda
-void Grafico::Calcular(int largura, int altura, float escala, int offsetX = 0) {
+// modificação: adicionado offsetTranslacao para translação do mouse
+void Grafico::Calcular(int largura, int altura, float escala, int offsetX, Vector2 offsetTranslacao) {
     m_pontos.clear();
     
 //    auto expr = parse<float>(m_funcao);
@@ -48,8 +50,8 @@ void Grafico::Calcular(int largura, int altura, float escala, int offsetX = 0) {
             //modificação: ignora pontos com valores inválidos (inf, nan)
             if (!std::isfinite(y)) continue;
 
-            float telaX = x * escala + largura / 2.0f + offsetX;
-            float telaY = altura / 2.0f - y * escala;
+            float telaX = x * escala + largura / 2.0f + offsetX + offsetTranslacao.x;
+            float telaY = altura / 2.0f - y * escala + offsetTranslacao.y;
 
             m_pontos.push_back({ telaX, telaY });
         } catch (const exception&){
