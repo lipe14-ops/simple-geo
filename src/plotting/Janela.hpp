@@ -50,7 +50,7 @@ void Janela::Executar() {
 
     int plotWidth = screenWidth - SIDEBAR_WIDTH;
 
-    Color background = LIGHTGRAY;
+    Color background = WHITE;  //LIGTHRAY
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
     MenuHelper menuHelper({(float)screenWidth - 690, 15}, 610, 370);
 

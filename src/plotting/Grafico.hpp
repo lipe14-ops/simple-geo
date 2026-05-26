@@ -32,8 +32,6 @@ Grafico::Grafico(string funcao, Color cor)
 void Grafico::Calcular(int largura, int altura, float escala, int offsetX, Vector2 offsetTranslacao) {
     m_pontos.clear();
     
-//    auto expr = parse<float>(m_funcao);
-
     //modificação: evita que um gráfico já inserido feche o programa
     ExprPtr<float> expr;
     try {
@@ -61,6 +59,10 @@ void Grafico::Calcular(int largura, int altura, float escala, int offsetX, Vecto
 }
 
 void Grafico::Desenhar() const {
-    if (!m_pontos.empty())
-        DrawLineStrip(m_pontos.data(), (int)m_pontos.size(), m_cor);
+    if (!m_pontos.empty()) {
+        float lineThickness = 3.0f;  // Espessura da linha em pixels
+        for (size_t i = 0; i < m_pontos.size() - 1; i++) {
+            DrawLineEx(m_pontos[i], m_pontos[i + 1], lineThickness, m_cor);
+        }
+    }
 }

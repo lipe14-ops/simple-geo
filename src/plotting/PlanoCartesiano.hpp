@@ -52,7 +52,7 @@ void PlanoCartesiano::Desenhar(int largura, int altura, int offsetX=0) const {
 void PlanoCartesiano::DesenharEixos(int largura, int altura, int offsetX) const {
     float centerX = offsetX + largura / 2.0f + m_offsetTranslacao.x;
     float centerY = altura / 2.0f + m_offsetTranslacao.y;
-    int fontSize = 15;
+    int fontSize = 18;
     
     DrawLine(offsetX, centerY, offsetX + largura, centerY, BLACK);       // Eixo X
     DrawLine(centerX, 0, centerX, altura, BLACK);                         // Eixo Y
@@ -92,11 +92,7 @@ void PlanoCartesiano::DesenharEixos(int largura, int altura, int offsetX) const 
 void PlanoCartesiano::DesenharGrid(int largura, int altura, int offsetX) const {
     float centerX = offsetX + largura / 2.0f + m_offsetTranslacao.x;
     float centerY = altura / 2.0f + m_offsetTranslacao.y;
-
-    // Calcular limites do grid
-    //float halfWidth = largura / 2.0f;
-    //float halfHeight = altura / 2.0f;
-    
+  
     // Linhas verticais - começando de x = 0 no centro e indo para ambos os lados
     for (float screenX = centerX; screenX <= offsetX + largura; screenX += m_escala) {
         if (screenX <= offsetX + largura) {
