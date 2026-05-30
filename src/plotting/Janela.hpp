@@ -52,7 +52,7 @@ void Janela::Executar() {
 
     Color background = WHITE;  //LIGTHRAY
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
-    MenuHelper menuHelper({(float)screenWidth - 690, 15}, 610, 370);
+    MenuHelper menuHelper((float)screenWidth);
 
     while (!WindowShouldClose()) {
         ProcessarEntrada();
@@ -62,18 +62,12 @@ void Janela::Executar() {
         plotWidth = screenWidth - SIDEBAR_WIDTH;
 
         sidebar.Update();
-        if(sidebar.GetInput().IsSubmitted()){
-            const char* funcao = sidebar.GetInput().GetSubmittedFuncion();
-            Color functionColor = BLUE;
-
+        m_plano.Limpar();
+        auto funcoesVisiveis = sidebar.GetGerenciador().GetFuncoesVisiveis();
+        for (const auto& f : funcoesVisiveis) {
             try {
-                sidebar.ClearError();
-                m_plano.Limpar();
-                m_plano.AdicionarGrafico(funcao, functionColor);
-                sidebar.GetInput().SetSubmittedColor(functionColor);
-            } catch (const runtime_error& e) {
-                sidebar.SetError(e.what());
-            }
+                m_plano.AdicionarGrafico(f.expressao, f.cor);
+            } catch (const std::runtime_error& e) { }
         }
 
         m_plano.Atualizar(plotWidth, screenHeight, SIDEBAR_WIDTH);
@@ -88,7 +82,7 @@ void Janela::Executar() {
             if (GuiButton({(float)screenWidth - 65, 15, 50, 50}, "?")) {
                 menuHelper.Toggle();
             }
-            menuHelper.Draw();       
+            menuHelper.Draw((float)screenWidth);       
             sidebar.Draw(screenHeight);
 
         EndDrawing();
