@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    Janela app(1700, 900, "Simple GEO");
+    Janela app(1200, 600, "Simple GEO");
     app.Executar();
     
     return 0;

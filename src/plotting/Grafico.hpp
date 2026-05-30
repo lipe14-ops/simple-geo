@@ -43,7 +43,9 @@ void Grafico::Calcular(int largura, int altura, float escala, int offsetX, Vecto
     for (float x = -(float)largura / 2; x < (float)largura / 2; x += 0.1f) {
         //modificação: try exception
         try {
-            float y = expr->eval(x);
+            float y = expr->eval({ 
+                {"x", x}, // { "nomevariavel", valor_variavel }
+             });
 
             //modificação: ignora pontos com valores inválidos (inf, nan)
             if (!std::isfinite(y)) continue;
