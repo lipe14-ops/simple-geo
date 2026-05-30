@@ -19,13 +19,18 @@ private:
     int m_larguraInicial;
     int m_alturaInicial;
     PlanoCartesiano m_plano;
+    float m_velocidadeZoom = 5.0f;  // Controla a sensibilidade do zoom
+    Vector2 m_posicaoMouseAnterior = {0.0f, 0.0f};
+    bool m_arrastando = false;
 
     void ProcessarEntrada();
     void AlternarTelaCheia();
+    void ProcessarZoom();
+    void ProcessarTranslacao();
 };
 
 Janela::Janela(int largura, int altura, const char* titulo)
-    : m_larguraInicial(largura), m_alturaInicial(altura), m_plano(20.0f)
+    : m_larguraInicial(largura), m_alturaInicial(altura), m_plano(80.0f)
 {
     InitWindow(largura, altura, titulo);
     SetTargetFPS(60);
@@ -45,7 +50,7 @@ void Janela::Executar() {
 
     int plotWidth = screenWidth - SIDEBAR_WIDTH;
 
-    Color background = LIGHTGRAY;
+    Color background = WHITE;  //LIGTHRAY
     Sidebar sidebar(screenHeight, SIDEBAR_WIDTH);
     MenuHelper menuHelper((float)screenWidth);
 
@@ -87,6 +92,38 @@ void Janela::Executar() {
 void Janela::ProcessarEntrada() {
     if (IsKeyPressed(KEY_F11))
         AlternarTelaCheia();
+    ProcessarZoom();
+    ProcessarTranslacao();
+}
+
+void Janela::ProcessarZoom() {
+    float mouseWheelMove = GetMouseWheelMove();
+    if (mouseWheelMove != 0.0f) {
+        float escalaAtual = m_plano.GetEscala();
+        float novaEscala = escalaAtual + (mouseWheelMove * m_velocidadeZoom);
+        m_plano.AlterarEscala(novaEscala);
+    }
+}
+
+void Janela::ProcessarTranslacao() {
+    Vector2 mousePosAtual = GetMousePosition();
+    
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        m_arrastando = true;
+        m_posicaoMouseAnterior = mousePosAtual;
+    }
+    
+    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        m_arrastando = false;
+    }
+    
+    if (m_arrastando) {
+        Vector2 diferenca = {mousePosAtual.x - m_posicaoMouseAnterior.x,
+                             mousePosAtual.y - m_posicaoMouseAnterior.y};
+        Vector2 offsetAtual = m_plano.GetOffset();
+        m_plano.AlterarOffset({offsetAtual.x + diferenca.x, offsetAtual.y + diferenca.y});
+        m_posicaoMouseAnterior = mousePosAtual;
+    }
 }
 
 void Janela::AlternarTelaCheia() {

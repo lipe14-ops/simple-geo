@@ -5,7 +5,7 @@
 #include "inputBox.hpp"
 #include <string>
 #include "FuncaoRegistro.hpp"
-#include "GerenciadorFuncoes.hpp"
+#include "gerenciadorFuncoes.hpp"
 #include "ListaFuncoes.hpp"
 #include "MenuDropdown.hpp"
 
