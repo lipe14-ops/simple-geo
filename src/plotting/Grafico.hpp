@@ -14,7 +14,8 @@ class Grafico {
 public:
     Grafico(std::string funcao, Color cor = BLUE);
     // modificação: adicionado offset
-    void Calcular(int largura, int altura, float escala, int offsetX);
+    // modificação: adicionado offsetTranslacao para translação do mouse
+    void Calcular(int largura, int altura, float escala, int offsetX, Vector2 offsetTranslacao = {0.0f, 0.0f});
     void Desenhar() const;
 
 private:
@@ -27,11 +28,10 @@ Grafico::Grafico(string funcao, Color cor)
     : m_funcao(funcao), m_cor(cor) {}
 
 // modificação: adicionado offset como parâmetro para calcular a distância da barra lateral da esquerda
-void Grafico::Calcular(int largura, int altura, float escala, int offsetX = 0) {
+// modificação: adicionado offsetTranslacao para translação do mouse
+void Grafico::Calcular(int largura, int altura, float escala, int offsetX, Vector2 offsetTranslacao) {
     m_pontos.clear();
     
-//    auto expr = parse<float>(m_funcao);
-
     //modificação: evita que um gráfico já inserido feche o programa
     ExprPtr<float> expr;
     try {
@@ -43,13 +43,15 @@ void Grafico::Calcular(int largura, int altura, float escala, int offsetX = 0) {
     for (float x = -(float)largura / 2; x < (float)largura / 2; x += 0.1f) {
         //modificação: try exception
         try {
-            float y = expr->eval(x);
+            float y = expr->eval({ 
+                {"x", x}, // { "nomevariavel", valor_variavel }
+             });
 
             //modificação: ignora pontos com valores inválidos (inf, nan)
             if (!std::isfinite(y)) continue;
 
-            float telaX = x * escala + largura / 2.0f + offsetX;
-            float telaY = altura / 2.0f - y * escala;
+            float telaX = x * escala + largura / 2.0f + offsetX + offsetTranslacao.x;
+            float telaY = altura / 2.0f - y * escala + offsetTranslacao.y;
 
             m_pontos.push_back({ telaX, telaY });
         } catch (const exception&){
@@ -59,6 +61,10 @@ void Grafico::Calcular(int largura, int altura, float escala, int offsetX = 0) {
 }
 
 void Grafico::Desenhar() const {
-    if (!m_pontos.empty())
-        DrawLineStrip(m_pontos.data(), (int)m_pontos.size(), m_cor);
+    if (!m_pontos.empty()) {
+        float lineThickness = 3.0f;  // Espessura da linha em pixels
+        for (size_t i = 0; i < m_pontos.size() - 1; i++) {
+            DrawLineEx(m_pontos[i], m_pontos[i + 1], lineThickness, m_cor);
+        }
+    }
 }

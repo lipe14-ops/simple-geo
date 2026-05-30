@@ -1,4 +1,7 @@
 .vscode/
 *.exe
 
-obj/
+/obj
+
+main
+run.sh
